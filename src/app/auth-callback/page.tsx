@@ -1,15 +1,14 @@
 "use client";
-
 import { useRouter, useSearchParams } from "next/navigation";
-// import { trpc } from "../_trpc/client";
 import { Loader2 } from "lucide-react";
+import { trpc } from "../_trpc/client";
 
 const Page = () => {
   const router = useRouter();
-
   const searchParams = useSearchParams();
   const origin = searchParams.get("origin");
-
+  const { data } = trpc.test.useQuery();
+  console.log("result here: ", data?.name);
   return (
     <div className="w-full mt-24 flex justify-center">
       <div className="flex flex-col items-center gap-2">
