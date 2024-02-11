@@ -7,8 +7,23 @@ const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const origin = searchParams.get("origin");
-  const { data } = trpc.test.useQuery();
-  console.log("result here: ", data?.name);
+
+  const { data, isLoading, isSuccess, isError, error } =
+    trpc.authCallback.useQuery(undefined, {
+      retry: true,
+      retryDelay: 500,
+    });
+
+  if (isSuccess) {
+    router.push(origin ? `/${origin}` : "/dashboard");
+  }
+
+  if (isError && error.data?.code === "UNAUTHORIZED") {
+    router.push("/sign-in");
+  }
+
+  
+
   return (
     <div className="w-full mt-24 flex justify-center">
       <div className="flex flex-col items-center gap-2">
