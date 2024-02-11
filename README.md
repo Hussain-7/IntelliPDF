@@ -4,7 +4,7 @@
 
 ### TRPC Server Setup In Next App Router
 
-1. Create a file `src/trpc/trpc.ts`
+1. Create a file `src/trpc/trpc.ts` - [Reference](https://trpc.io/docs/client/nextjs/setup)
 
 	```
 	import { initTRPC } from "@trpc/server";
@@ -16,7 +16,7 @@
 	export const publicProcedure = t.procedure;
 	```
 
-2. Create a file `src/trpc/index.ts`
+2. Create a file `src/trpc/index.ts` - [Reference](https://trpc.io/docs/client/nextjs/setup)
 
 	```
 	import { publicProcedure, router } from "./trpc";
@@ -31,7 +31,7 @@
 	```
 
 ### TRPC Client Setup In Next App Router
-1. First create a Provider Component and wrap in the layout.ts file
+1. Create a tRPC client, and wrap your application in the tRPC Provider, as below. You will also need to set up and connect React Query. First create a Provider Component and wrap in the layout.ts file - [Reference](https://trpc.io/docs/client/react/setup#4-add-trpc-providers)
 	```
 	"use client";
 
@@ -62,7 +62,7 @@
 	export default Providers;
 	```
 
-2. Initialize the trpc client by creating a file `src/app/trpc/client.ts`
+2. To Create a set of strongly-typed React hooks from your AppRouter type signature with createTRPCReact.Initialize the trpc client by creating a file `src/app/trpc/client.ts` - [Reference](https://trpc.io/docs/client/react/setup#4-add-trpc-providers)
 
 	```
 	import { AppRouter } from "@/trpc";
@@ -71,7 +71,7 @@
 	export const trpc = createTRPCReact<AppRouter>({});
 	```
 
-3. Then add a route handler for trpc in `src/app/api/trpc/[trpc]/route.ts`
+3. Then add a route handler for trpc in `src/app/api/trpc/[trpc]/route.ts` - [Reference](https://trpc.io/docs/server/adapters/nextjs#route-handlers)
 
 	```
 	import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
