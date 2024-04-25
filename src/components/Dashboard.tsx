@@ -14,17 +14,10 @@ const Dashboard = (props: Props) => {
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
     string | null
   >(null);
-  // const files = [
-  //   {
-  //     id: "3223",
-  //     createdAt: "2024-02-11T20:46:29.113Z",
-  //     name: "test",
-  //   },
-  // ];
-
   const { data: files } = trpc.getUserFiles.useQuery();
+  const { mutate: deleteFile } = trpc.deleteFile.useMutation();
 
-  const deleteFile = ({ id }: { id: string }) => {};
+ 
   return (
     <main className="mx-auto max-w-7xl md:p-10">
       <div className="mt-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0">
