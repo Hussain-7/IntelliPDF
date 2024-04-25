@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { Button } from "./ui/button";
 import Skeleton from "react-loading-skeleton";
 import UploadButton from "./UploadButton";
+import { trpc } from "@/app/_trpc/client";
 
 type Props = {};
 
@@ -13,13 +14,15 @@ const Dashboard = (props: Props) => {
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
     string | null
   >(null);
-  const files = [
-    {
-      id: "3223",
-      createdAt: "2024-02-11T20:46:29.113Z",
-      name: "test",
-    },
-  ];
+  // const files = [
+  //   {
+  //     id: "3223",
+  //     createdAt: "2024-02-11T20:46:29.113Z",
+  //     name: "test",
+  //   },
+  // ];
+
+  const { data: files } = trpc.getUserFiles.useQuery();
 
   const deleteFile = ({ id }: { id: string }) => {};
   return (
