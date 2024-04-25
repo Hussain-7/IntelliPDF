@@ -14,10 +14,22 @@ const Dashboard = (props: Props) => {
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
     string | null
   >(null);
-  const { data: files } = trpc.getUserFiles.useQuery();
-  const { mutate: deleteFile } = trpc.deleteFile.useMutation();
+  const { data: files, isLoading } = trpc.getUserFiles.useQuery();
 
- 
+  const utils = trpc.useUtils();
+
+  const { mutate: deleteFile } = trpc.deleteFile.useMutation({
+    onSuccess: () => {
+      utils.getUserFiles.invalidate();
+    },
+    onMutate({ id }) {
+      setCurrentlyDeletingFile(id);
+    },
+    onSettled() {
+      setCurrentlyDeletingFile(null);
+    },
+  });
+
   return (
     <main className="mx-auto max-w-7xl md:p-10">
       <div className="mt-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0">
@@ -83,7 +95,7 @@ const Dashboard = (props: Props) => {
               </li>
             ))}
         </ul>
-      ) : false ? (
+      ) : isLoading ? (
         <Skeleton height={100} className="my-2" count={3} />
       ) : (
         <div className="mt-16 flex flex-col items-center gap-2">
