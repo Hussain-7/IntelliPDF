@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import { publicProcedure, router } from "./trpc";
+import { publicProcedure, router, privateProcedure } from "./trpc";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { db } from "@/db";
 
@@ -30,6 +30,8 @@ export const appRouter = router({
 
     return { success: true };
   }),
+
+  getUserFiles: privateProcedure.query(({ ctx }) => {}),
 });
 
 export type AppRouter = typeof appRouter;

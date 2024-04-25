@@ -2,7 +2,7 @@
 import { Ghost, Loader2, MessageSquare, Plus, Trash } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
-import { format } from "util";
+import { format } from "date-fns";
 import { Button } from "./ui/button";
 import Skeleton from "react-loading-skeleton";
 import UploadButton from "./UploadButton";
