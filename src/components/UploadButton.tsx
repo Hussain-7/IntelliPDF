@@ -26,6 +26,13 @@ const UploadDropzone = () => {
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const { toast } = useToast();
+  const { mutate: startPolling } = trpc.getFile.useMutation({
+    onSuccess: (file) => {
+      router.push(`/dashboard/${file.id}`);
+    },
+    retry: true,
+    retryDelay: 500,
+  });
   const { startUpload } = useUploadThing("pdfUploader");
   const startSimulatedProgress = () => {
     setUploadProgress(0);
@@ -78,6 +85,7 @@ const UploadDropzone = () => {
         setUploadProgress(100);
 
         // confirm via polling if it is uploaded to db
+        startPolling({ key });
       }}
     >
       {({ getRootProps, getInputProps, acceptedFiles }) => (
@@ -126,6 +134,14 @@ const UploadDropzone = () => {
                   ) : null}
                 </div>
               ) : null}
+
+              <input
+                {...getInputProps()}
+                type="file"
+                id="dropzone-file"
+                className="hidden"
+              />
+              
             </label>
           </div>
         </div>
