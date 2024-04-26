@@ -12,6 +12,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@kinde-oss/kinde-auth-nextjs": "^2.1.10",
+    "@langchain/openai": "^0.0.28",
     "@langchain/pinecone": "^0.0.4",
     "@pinecone-database/pinecone": "^2.2.0",
     "@prisma/client": "^5.9.1",
@@ -27,6 +28,7 @@
     "@trpc/react-query": "^11.0.0-next-beta.274",
     "@trpc/server": "^11.0.0-next-beta.274",
     "@uploadthing/react": "^6.5.0",
+    "ai": "^3.0.34",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
