@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { notFound, redirect } from "next/navigation";
 import React from "react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import PdfRenderer from "@/components/chat/PdfRenderer";
+import PdfRenderer from "@/components/pdf/PdfRenderer";
 import ChatWrapper from "@/components/chat/ChatWrapper";
 type Props = {
   params: {
