@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useRef, useState } from "react";
+import { ReactNode, createContext, useContext, useRef, useState } from "react";
 import { trpc } from "@/app/_trpc/client";
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
@@ -63,4 +63,8 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
       {children}
     </ChatContext.Provider>
   );
+};
+
+export const useChat = () => {
+  return useContext(ChatContext);
 };

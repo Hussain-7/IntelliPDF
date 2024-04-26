@@ -7,13 +7,14 @@ import { PineconeStore } from "@langchain/pinecone";
 import { NextRequest } from "next/server";
 import { openai } from "@/lib/openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import { w2FormContext } from "@/constants/data";
 
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-
-  if (!user || user?.id)
+  console.log("usr", user);
+  if (!user || !user?.id)
     return new Response("Unauthorized", {
       status: 401,
     });
@@ -90,7 +91,12 @@ export const POST = async (req: NextRequest) => {
       },
       {
         role: "user",
-        content: `Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format. \nIf you don't know the answer, just say that you don't know, don't try to make up an answer.
+				content: `Use the following pieces of context (It is basically w-2 form known as the Wage and Tax Statement) (or previous conversaton if needed) 
+				to answer the users question in markdown format. The user will ask question regarding this w-2 form. Here is some context that how to read that form\n
+				 
+				${w2FormContext}
+				
+				\nIf you don't know the answer, just say that you don't know, don't try to make up an answer.
         
   \n----------------\n
   
