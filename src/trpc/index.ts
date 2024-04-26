@@ -30,6 +30,7 @@ export const appRouter = router({
 
     return { success: true };
   }),
+
   getUserFiles: privateProcedure.query(async ({ ctx }) => {
     const { userId, user } = ctx;
     const id = user.id;
@@ -65,6 +66,7 @@ export const appRouter = router({
 
       return file;
     }),
+
   getFile: privateProcedure
     .input(z.object({ key: z.string() }))
     .mutation(async ({ ctx, input }) => {
@@ -78,6 +80,21 @@ export const appRouter = router({
       });
       if (!file) throw new TRPCError({ code: "NOT_FOUND" });
       return file;
+    }),
+
+  getFileUploadStatus: privateProcedure
+    .input(z.object({ fileId: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const file = await db.file.findFirst({
+        where: {
+          id: input.fileId,
+          userId: ctx.userId,
+        },
+      });
+
+      if (!file) return { status: "PENDING" as const, name: "hussain" };
+
+      return { status: file.uploadStatus, name: "hussain" };
     }),
 });
 

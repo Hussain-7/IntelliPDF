@@ -28,7 +28,7 @@ export default function Home() {
             className: "mt-5",
           })}
           href="/dashboard"
-          target="_blank"
+          // target="_blank"
         >
           Get started <ArrowRight className="ml-2 h-5 w-5" />
         </Link>
@@ -135,7 +135,7 @@ export default function Home() {
                 Start asking questions
               </span>
               <span className="mt-2 text-zinc-700">
-                It&apos;s that simple. Try out Quill today - it really takes
+                It&apos;s that simple. Try out IntelliPDF today - it really takes
                 less than a minute.
               </span>
             </div>

@@ -28,6 +28,8 @@ export const ourFileRouter = {
           uploadStatus: "PROCESSING",
         },
       });
+
+      // Index the file into vector database then update the loading state.
     }),
 } satisfies FileRouter;
 
