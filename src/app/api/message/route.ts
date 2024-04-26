@@ -7,7 +7,7 @@ import { PineconeStore } from "@langchain/pinecone";
 import { NextRequest } from "next/server";
 import { openai } from "@/lib/openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
-import { w2FormContext } from "@/constants/data";
+import { w2FormContext } from "@/config/training-data";
 
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
@@ -58,7 +58,10 @@ export const POST = async (req: NextRequest) => {
   // Checking for 4 closest results to the message
   const results = await vectorStore.similaritySearch(message, 4);
 
-  console.log("Search results from vector db", results);
+  console.log(
+    "Search results from vector db",
+    results.map((r) => r.pageContent).join("\n\n")
+  );
 
   // also pass previous messages to the llm
   const previousMessages = await db.message.findMany({
@@ -80,26 +83,18 @@ export const POST = async (req: NextRequest) => {
   }));
 
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
     temperature: 0,
     stream: true,
     messages: [
       {
         role: "system",
         content:
-          "Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format.",
+          "Your are a tax form summarizer. Use the following pieces of context (w2-forms) (or previous conversaton if needed) to answer the users question in markdown format.",
       },
       {
         role: "user",
-				content: `Use the following pieces of context (It is basically w-2 form known as the Wage and Tax Statement) (or previous conversaton if needed) 
-				to answer the users question in markdown format. The user will ask question regarding this w-2 form. Here is some context that how to read that form\n
-				 
-				${w2FormContext}
-				
-				\nIf you don't know the answer, just say that you don't know, don't try to make up an answer.
-        
-  \n----------------\n
-  
+        content: `
   PREVIOUS CONVERSATION:
   ${formattedPrevMessages.map((message) => {
     if (message.role === "user") return `User: ${message.content}\n`;
@@ -108,7 +103,9 @@ export const POST = async (req: NextRequest) => {
   
   \n----------------\n
   
-  CONTEXT:
+	${w2FormContext}
+
+  CONTEXT FROM DATA:
   ${results.map((r) => r.pageContent).join("\n\n")}
   
   USER INPUT: ${message}`,

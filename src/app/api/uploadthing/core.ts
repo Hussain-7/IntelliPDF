@@ -54,7 +54,8 @@ export const ourFileRouter = {
         const embeddings = new OpenAIEmbeddings({
           openAIApiKey: process.env.OPEN_AI_API_KEY!,
         });
-        console.log("embedding created");
+        
+        console.log("embedding created", embeddings);
         // It converts texxt from the each page of pdf in pageLevelDocs into vectors using the embeddings
         // which are then indexed into the pinecone vector database
         await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
