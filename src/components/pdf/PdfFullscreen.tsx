@@ -54,10 +54,7 @@ const PdfFullscreen = ({ fileUrl }: PdfFullscreenProps) => {
               className="max-h-full"
             >
               {new Array(numPages).fill(0).map((_, i) => (
-                <>
-                  {/* <hr className="my-1" /> */}
-                  <Page key={i} width={width ? width : 1} pageNumber={i + 1} />
-                </>
+                <Page key={i} width={width ? width : 1} pageNumber={i + 1} />
               ))}
             </Document>
           </div>
