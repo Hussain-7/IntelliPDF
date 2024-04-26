@@ -1,5 +1,12 @@
 "use client";
-import { Ghost, Loader2, MessageSquare, Plus, Trash } from "lucide-react";
+import {
+  Ghost,
+  Loader,
+  Loader2,
+  MessageSquare,
+  Plus,
+  Trash,
+} from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { format } from "date-fns";
@@ -95,8 +102,13 @@ const Dashboard = (props: Props) => {
               </li>
             ))}
         </ul>
-      ) : isLoading ? (
-        <Skeleton height={100} className="my-2" count={3} />
+      ) : true ? (
+        <div className="h-32 md:h-56 flex items-center justify-center gap-2 animate-pulse">
+          {/* Fix this skeleton not showing up for some reason */}
+          {/* <Skeleton count={3} height={100} /> */}
+          <Loader2 className="animate-spin h-6 w-6 " />
+          <div>Fetching your files</div>
+        </div>
       ) : (
         <div className="mt-16 flex flex-col items-center gap-2">
           <Ghost className="h-8 w-8 text-zinc-800" />
