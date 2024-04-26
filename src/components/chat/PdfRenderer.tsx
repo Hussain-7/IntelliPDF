@@ -1,5 +1,11 @@
 "use client";
-import { ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Loader2,
+  RotateCw,
+  Search,
+} from "lucide-react";
 import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -12,6 +18,14 @@ import { useForm } from "react-hook-form";
 import { Input } from "../ui/input";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import SimpleBar from "simplebar-react";
+import PdfFullscreen from "./PdfFullscreen";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -54,6 +68,7 @@ const PdfRenderer = ({ url }: Props) => {
   return (
     <div className="w-full bg-white rounded-md shadow flex flex-col items-center">
       <div className="h-14 w-full border-b border-zinc-200 flex items-center justify-between px-2">
+        {/* Page up and down */}
         <div className="flex items-center gap-1.5">
           <Button
             disabled={currPage <= 1}
@@ -100,41 +115,81 @@ const PdfRenderer = ({ url }: Props) => {
             <ChevronUp className="h-4 w-4" />
           </Button>
         </div>
+
+        {/* Zoom in zoom out */}
+        <div className="space-x-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="gap-1.5" aria-label="zoom" variant="ghost">
+                <Search className="h-4 w-4" />
+                {scale * 100}%
+                <ChevronDown className="h-3 w-3 opacity-50" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem onSelect={() => setScale(1)}>
+                100%
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => setScale(1.5)}>
+                150%
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => setScale(2)}>
+                200%
+              </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => setScale(2.5)}>
+                250%
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <Button
+            onClick={() => setRotation((prev) => prev + 90)}
+            variant="ghost"
+            aria-label="rotate 90 degrees"
+          >
+            <RotateCw className="h-4 w-4" />
+          </Button>
+
+          <PdfFullscreen fileUrl={url} />
+        </div>
       </div>
       <div className="flex-1 w-full max-h-screen">
-        <div ref={ref}>
-          <Document
-            loading={
-              <div className="flex justify-center">
-                <Loader2 className="my-24 h-6 w-6 animate-spin" />
-              </div>
-            }
-            onLoadError={(error) => {
-              console.error(error);
-              toast({
-                title: "Error loading PDF",
-                description: "Please try again later",
-                variant: "destructive",
-              });
-            }}
-            onLoadSuccess={({ numPages }) => {
-              setNumPages(numPages);
-            }}
-            file={url}
-            className={"max-h-full"}
-          >
-            <Page
+        <SimpleBar autoHide={false} className="max-h-[calc(100vh-10rem)]">
+          <div ref={ref}>
+            <Document
               loading={
-                <div className="flex justify-center h-full w-full items-center">
+                <div className="flex justify-center">
                   <Loader2 className="my-24 h-6 w-6 animate-spin" />
                 </div>
               }
-              width={width ? width : 1}
-              pageNumber={currPage}
-              scale={scale}
-            />
-          </Document>
-        </div>
+              onLoadError={(error) => {
+                console.error(error);
+                toast({
+                  title: "Error loading PDF",
+                  description: "Please try again later",
+                  variant: "destructive",
+                });
+              }}
+              onLoadSuccess={({ numPages }) => {
+                setNumPages(numPages);
+              }}
+              file={url}
+              className={"max-h-full"}
+            >
+              <Page
+                loading={
+                  <div className="flex justify-center h-full w-full items-center">
+                    <Loader2 className="my-24 h-6 w-6 animate-spin" />
+                  </div>
+                }
+                width={width ? width : 1}
+                pageNumber={currPage}
+                scale={scale}
+                rotate={rotation}
+              />
+            </Document>
+          </div>
+        </SimpleBar>
       </div>
     </div>
   );
