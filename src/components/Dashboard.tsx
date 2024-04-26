@@ -102,7 +102,7 @@ const Dashboard = (props: Props) => {
               </li>
             ))}
         </ul>
-      ) : true ? (
+      ) : isLoading ? (
         <Skeleton height={100} className="my-2" count={3} />
       ) : (
         <div className="mt-16 flex flex-col items-center gap-2">
