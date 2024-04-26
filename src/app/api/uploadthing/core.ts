@@ -6,7 +6,7 @@ import { UploadThingError } from "uploadthing/server";
 const f = createUploadthing();
 
 export const ourFileRouter = {
-  pdfUploader: f({ pdf: { maxFileSize: "4MB" } })
+  pdfUploader: f({ pdf: { maxFileSize: "16MB" } })
     .middleware(async ({ req }) => {
       const { getUser } = getKindeServerSession();
       const user = await getUser();
@@ -22,7 +22,9 @@ export const ourFileRouter = {
           key: file.key,
           userId: metadata.userId,
           name: file.name,
-          url: `https://uploadthing-prod.s3.us-west-2.amazonaws.com/${file.key}`,
+          // https://utfs.io/f/
+          // url: `https://uploadthing-prod.s3.us-west-2.amazonaws.com/${file.key}`,
+          url: `https://utfs.io/f/${file.key}`,
           uploadStatus: "PROCESSING",
         },
       });
