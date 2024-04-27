@@ -21,8 +21,8 @@ const Dashboard = (props: Props) => {
   const [currentlyDeletingFile, setCurrentlyDeletingFile] = useState<
     string | null
   >(null);
-  const { data: files, isLoading } = trpc.getUserFiles.useQuery();
-
+  const { data: files, isLoading, error } = trpc.getUserFiles.useQuery();
+  console.log("Error from trpc in dashboard", files, error);
   const utils = trpc.useUtils();
 
   const { mutate: deleteFile } = trpc.deleteFile.useMutation({
