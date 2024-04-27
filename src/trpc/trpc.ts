@@ -11,7 +11,7 @@ const isAuth = middleware(async (opts) => {
   if (!user || !user?.id) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
-      message: "The user is unauthenticated",
+      message: "no user found in auth middleware",
     });
   }
 
