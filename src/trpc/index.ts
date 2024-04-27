@@ -4,7 +4,6 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { db } from "@/db";
 import { z } from "zod";
 import { INFINITE_QUERY_LIMIT } from "@/config/infinite-query";
-
 import { UTApi } from "uploadthing/server";
 import { pinecone } from "@/lib/pinecone";
 export const utapi = new UTApi();
@@ -171,9 +170,9 @@ export const appRouter = router({
         },
       });
 
-      if (!file) return { status: "PENDING" as const, name: "hussain" };
+      if (!file) return { status: "PENDING" as const };
 
-      return { status: file.uploadStatus, name: "hussain" };
+      return { status: file.uploadStatus };
     }),
 });
 
