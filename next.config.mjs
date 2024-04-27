@@ -9,7 +9,7 @@ const nextConfig = {
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value: "intellipdf-v2.vercel.app",
+            value: "*",
           },
           {
             key: "Access-Control-Allow-Methods",
