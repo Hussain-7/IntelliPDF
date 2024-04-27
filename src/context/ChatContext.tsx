@@ -111,6 +111,92 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
       setIsLoading(false);
       await utils.getFileMessages.invalidate({ fileId });
     },
+    // Handle the ai response streaming in ui
+    onSuccess: async (stream) => {
+      setIsLoading(false);
+
+      if (!stream) {
+        return toast({
+          title: "There was a problem sending this message",
+          description: "Please refresh this page and try again",
+          variant: "destructive",
+        });
+      }
+
+      const reader = stream.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let done = false;
+
+      // accumulated response
+      let accResponse = "";
+
+      while (!done) {
+        const { value, done: doneReading } = await reader.read();
+        done = doneReading;
+        const chunkValue = decoder.decode(value, {
+          stream: !done,
+        });
+        console.log("value", value);
+        console.log("chunkValue", chunkValue);
+
+        let cleanedChunk = chunkValue.split('"\n0:"').filter(Boolean).join("");
+        // Remove the first two and last charcter from cleaned chunk
+
+        cleanedChunk = cleanedChunk.slice(3, cleanedChunk.length - 2);
+
+        console.log("cleanedChunk", cleanedChunk);
+        accResponse += cleanedChunk;
+
+        // append chunk to the actual message
+        utils.getFileMessages.setInfiniteData(
+          { fileId, limit: INFINITE_QUERY_LIMIT },
+          (old) => {
+            if (!old) return { pages: [], pageParams: [] };
+
+            let isAiResponseCreated = old.pages.some((page) =>
+              page.messages.some((message) => message.id === "ai-response")
+            );
+
+            let updatedPages = old.pages.map((page) => {
+              if (page === old.pages[0]) {
+                let updatedMessages;
+
+                if (!isAiResponseCreated) {
+                  updatedMessages = [
+                    {
+                      createdAt: new Date().toISOString(),
+                      id: "ai-response",
+                      text: accResponse,
+                      isUserMessage: false,
+                    },
+                    ...page.messages,
+                  ];
+                } else {
+                  updatedMessages = page.messages.map((message) => {
+                    if (message.id === "ai-response") {
+                      return {
+                        ...message,
+                        text: accResponse,
+                      };
+                    }
+                    return message;
+                  });
+                }
+
+                return {
+                  ...page,
+                  messages: updatedMessages,
+                };
+              }
+
+              return page;
+            });
+
+            return { ...old, pages: updatedPages };
+          }
+        );
+      }
+    },
   });
 
   const addMessage = () => sendMessage({ message });

@@ -83,7 +83,7 @@ export const POST = async (req: NextRequest) => {
   }));
 
   const response = await openai.chat.completions.create({
-    model: "gpt-4",
+    model: "gpt-3.5-turbo",
     temperature: 0,
     stream: true,
     messages: [
@@ -115,6 +115,7 @@ export const POST = async (req: NextRequest) => {
 
   const stream = OpenAIStream(response, {
     async onCompletion(completion) {
+      console.log("Completion from response", completion);
       await db.message.create({
         data: {
           text: completion,
