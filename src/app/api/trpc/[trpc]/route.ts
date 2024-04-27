@@ -5,7 +5,6 @@ import {
 } from "@trpc/server/adapters/fetch";
 
 const handler = (req: Request) => {
-
   return fetchRequestHandler({
     endpoint: "/api/trpc",
     req: req,
