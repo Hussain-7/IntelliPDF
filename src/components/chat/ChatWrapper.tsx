@@ -22,7 +22,7 @@ const ChatWrapper = ({ fileId }: Props) => {
     },
     {
       refetchInterval: (data) => {
-        const status = data?.state?.data?.status;
+        const status = data?.status;
         return status === "SUCCESS" || status === "FAILED" ? false : 500;
       },
     }
