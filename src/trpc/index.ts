@@ -35,19 +35,15 @@ export const appRouter = router({
 
   getUserFiles: privateProcedure.query(async ({ ctx }) => {
     try {
-      const { userId, user } = ctx;
-      const id = user.id;
+      const { userId } = ctx;
       return await db.file.findMany({
         where: {
           userId,
         },
       });
-    } catch (error: any) {
-      console.log("error from getUserFiles", error.message);
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: error.message,
-      });
+    } catch (err: any) {
+      console.log(err);
+      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
     }
   }),
 
