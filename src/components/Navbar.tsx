@@ -8,6 +8,7 @@ import {
   RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
+import UserAccountNav from "./UserAccountNav";
 
 type Props = {};
 
@@ -64,7 +65,7 @@ const Navbar = async (props: Props) => {
                   Dashboard
                 </Link>
 
-                {/* <UserAccountNav
+                <UserAccountNav
                   name={
                     !user.given_name || !user.family_name
                       ? "Your Account"
@@ -72,7 +73,7 @@ const Navbar = async (props: Props) => {
                   }
                   email={user.email ?? ""}
                   imageUrl={user.picture ?? ""}
-                /> */}
+                />
               </>
             )}
           </div>
