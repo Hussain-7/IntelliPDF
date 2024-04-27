@@ -35,7 +35,7 @@ Section 12 : It features a series of codes used by the employer to report variou
 Section 13 (Statutory employee): This section has checkboxes for information related to retirement plans and third-party sick pay, and details statutory employee status—where employees are subject to Social Security and Medicare taxes, but not federal income taxes.\n
 Section 14: Reserved for reporting miscellaneous items that don’t fit into other sections, such as nontaxable income, union fees, or health insurance payments.\n
 
-The concluding sections, 15 to 20 These sections have the state and local income tax statistics outlined by the employer. You might see some repeated information in these sections from other parts of the form
+The concluding sections, 15 to 20 These sections have the state and local income tax statistics outlined by the employer. You might see some repeated information in these sections from other parts of the form. Those are just copies of the same form.
 
 \n-------------------------------------\n
 

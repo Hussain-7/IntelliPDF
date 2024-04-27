@@ -56,7 +56,7 @@ export const POST = async (req: NextRequest) => {
   });
 
   // Checking for 4 closest results to the message
-  const results = await vectorStore.similaritySearch(message, 4);
+  const results = await vectorStore.similaritySearch(message, 2);
 
   console.log(
     "Search results from vector db",
