@@ -105,14 +105,7 @@ export default function Home() {
                 Sign up for an account
               </span>
               <span className="mt-2 text-zinc-700">
-                Either starting out with a free plan or choose our{" "}
-                <Link
-                  href="/pricing"
-                  className="text-blue-700 underline underline-offset-2"
-                >
-                  pro plan
-                </Link>
-                .
+                Is Simple use google, twitter or whatever you like to sign up.
               </span>
             </div>
           </li>
@@ -135,8 +128,8 @@ export default function Home() {
                 Start asking questions
               </span>
               <span className="mt-2 text-zinc-700">
-                It&apos;s that simple. Try out IntelliPDF today - it really takes
-                less than a minute.
+                It&apos;s that simple. Try out IntelliPDF today - it really
+                takes less than a minute.
               </span>
             </div>
           </li>
