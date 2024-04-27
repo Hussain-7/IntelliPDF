@@ -11,7 +11,6 @@ const f = createUploadthing();
 export const ourFileRouter = {
   pdfUploader: f({
     pdf: { maxFileSize: "16MB" },
-    image: { maxFileSize: "4MB" },
   })
     .middleware(async ({ req }) => {
       const { getUser } = getKindeServerSession();
@@ -23,6 +22,7 @@ export const ourFileRouter = {
     })
     // This is triggered via an webhook on uploaded
     .onUploadComplete(async ({ metadata, file }) => {
+      console.log("Running onUploadComplete", file);
       const createdFile = await db.file.create({
         data: {
           key: file.key,
@@ -48,14 +48,11 @@ export const ourFileRouter = {
 
         // vectorize and index entire document so getting the index
         const pineconeIndex = pinecone.index("intelli-pdf");
-        console.log("Index found");
         // To take the text and convert into vectors. It is mapping for the text to vectors
         // This is instance is used to converty text into vector embeddings using openai's models
         const embeddings = new OpenAIEmbeddings({
           openAIApiKey: process.env.OPEN_AI_API_KEY!,
         });
-        
-        console.log("embedding created", embeddings);
         // It converts texxt from the each page of pdf in pageLevelDocs into vectors using the embeddings
         // which are then indexed into the pinecone vector database
         await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {

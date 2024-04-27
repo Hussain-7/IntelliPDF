@@ -31,7 +31,7 @@ const page = async ({ params: { fileid } }: Props) => {
         <div className="flex-1 xl:flex">
           <div className="px-4 py-6 sm:px-6 lg:pl-8 xl:flex-1 xl:pl-6">
             {/* Main area */}
-            <PdfRenderer url={file.url} />
+            <PdfRenderer url={file.url} name={file.name} />
           </div>
         </div>
 

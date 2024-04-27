@@ -31,9 +31,10 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 type Props = {
   url: string;
+  name: string;
 };
 
-const PdfRenderer = ({ url }: Props) => {
+const PdfRenderer = ({ url, name }: Props) => {
   const { toast } = useToast();
   const [numPages, setNumPages] = useState<number>();
   const [currPage, setCurrPage] = useState<number>(1);
@@ -117,7 +118,9 @@ const PdfRenderer = ({ url }: Props) => {
             <ChevronUp className="h-4 w-4" />
           </Button>
         </div>
-
+        <div className="hidden md:flex flex-1 h-full items-center justify-center font-semibold text-lg">
+          {name}
+        </div>
         {/* Zoom in zoom out */}
         <div className="space-x-2">
           <DropdownMenu>

@@ -5,6 +5,10 @@ import { db } from "@/db";
 import { z } from "zod";
 import { INFINITE_QUERY_LIMIT } from "@/config/infinite-query";
 
+import { UTApi } from "uploadthing/server";
+import { pinecone } from "@/lib/pinecone";
+export const utapi = new UTApi();
+
 export const appRouter = router({
   authCallback: publicProcedure.query(async () => {
     const { getUser } = getKindeServerSession();
@@ -67,19 +71,27 @@ export const appRouter = router({
 
       if (!file) throw new TRPCError({ code: "NOT_FOUND" });
 
+      // delete all message for this file
+      await db.message.deleteMany({
+        where: {
+          fileId: input.id,
+          userId,
+        },
+      });
+
+      // delete record from database
       await db.file.delete({
         where: {
           id: input.id,
         },
       });
 
-      // delete all message for this file
-      db.message.deleteMany({
-        where: {
-          fileId: input.id,
-        },
-      });
+      // Delete file from storage aswell
+      utapi.deleteFiles([file.key]);
 
+      // Delete the pinecone namespace in the index for this file aswell
+      const pineconeIndex = pinecone.index("intelli-pdf");
+      pineconeIndex.namespace(file.id).deleteAll();
       return file;
     }),
 
