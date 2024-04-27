@@ -39,6 +39,7 @@ The concluding sections, 15 to 20 These sections have the state and local income
 \n-------------------------------------\n
 
 \nIf you know the answer always give a quantitative answer, if possible. It may required you to plus and minus a few numbers some time but do that and tell the value.
+\nSecondly in the output no need to tell where you found that data. Just be precise and tell what you think the answer is.
 \nIf you don't know the answer, just say that you don't know, don't try to make up an answer.
 
 `;
