@@ -124,7 +124,7 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
       }
 
       const reader = stream.getReader();
-      const decoder = new TextDecoder("utf-8");
+      const decoder = new TextDecoder();
       let done = false;
 
       // accumulated response
@@ -133,19 +133,17 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
       while (!done) {
         const { value, done: doneReading } = await reader.read();
         done = doneReading;
-        const chunkValue = decoder.decode(value, {
-          stream: !done,
-        });
+        const chunkValue = decoder.decode(value);
         console.log("value", value);
         console.log("chunkValue", chunkValue);
 
-        let cleanedChunk = chunkValue.split('"\n0:"').filter(Boolean).join("");
-        // Remove the first two and last charcter from cleaned chunk
+        // let cleanedChunk = chunkValue.split('"\n0:"').filter(Boolean).join("");
+        // // Remove the first two and last charcter from cleaned chunk
 
-        cleanedChunk = cleanedChunk.slice(3, cleanedChunk.length - 2);
+        // cleanedChunk = cleanedChunk.slice(3, cleanedChunk.length - 2);
 
-        console.log("cleanedChunk", cleanedChunk);
-        accResponse += cleanedChunk;
+        // console.log("cleanedChunk", cleanedChunk);
+        accResponse += chunkValue;
 
         // append chunk to the actual message
         utils.getFileMessages.setInfiniteData(
