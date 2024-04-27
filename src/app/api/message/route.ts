@@ -123,6 +123,7 @@ export const POST = async (req: NextRequest) => {
           userId: user.id,
         },
       });
+      console.log("Saved message from response in database");
     },
   });
 
