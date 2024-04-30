@@ -15,7 +15,7 @@
 1. pinecone - (Vector Database)
 2. prisma - (Database ORM)
 3. openai - (GPT-4 API)
-4. langchain - (PDF LOADING)
+4. langchain - (PDF LOADING / OCR Type functionality)
 5. uploadthing - (File Upload TO S3)
 6. shadcn-ui - (UI Library)
 7. kindeauth - (Authentication)
