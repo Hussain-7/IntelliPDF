@@ -36,30 +36,37 @@ export const ourFileRouter = {
       });
       // Index the file into vector database then update the loading state.
       try {
-        const response = await fetch(`https://utfs.io/f/${file.key}`);
-        const blob = await response.blob();
-        const loader = new PDFLoader(blob);
+        // const response = await fetch(`https://utfs.io/f/${file.key}`);
+        // const blob = await response.blob();
+        // const loader = new PDFLoader(blob);
 
-        // To load all the text from the pdf. Each array element will contain text for page in the pdf
-        const pageLevelDocs = await loader.load();
+        // // To load all the text from the pdf. Each array element will contain text for page in the pdf
+        // const pageLevelDocs = await loader.load();
 
-        // page count in pdf
-        const pagesAmt = pageLevelDocs.length;
+        // // page count in pdf
+        // const pagesAmt = pageLevelDocs.length;
 
-        // vectorize and index entire document so getting the index
-        const pineconeIndex = pinecone.index("intelli-pdf");
-        // To take the text and convert into vectors. It is mapping for the text to vectors
-        // This is instance is used to converty text into vector embeddings using openai's models
-        const embeddings = new OpenAIEmbeddings({
-          openAIApiKey: process.env.OPEN_AI_API_KEY!,
-        });
-        // It converts texxt from the each page of pdf in pageLevelDocs into vectors using the embeddings
-        // which are then indexed into the pinecone vector database
-        await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
-          pineconeIndex,
-          namespace: createdFile.id,
-        });
+        // // vectorize and index entire document so getting the index
+        // const pineconeIndex = pinecone.index("intelli-pdf");
+        // // To take the text and convert into vectors. It is mapping for the text to vectors
+        // // This is instance is used to converty text into vector embeddings using openai's models
+        // const embeddings = new OpenAIEmbeddings({
+        //   openAIApiKey: process.env.OPEN_AI_API_KEY!,
+        // });
+        // // It converts texxt from the each page of pdf in pageLevelDocs into vectors using the embeddings
+        // // which are then indexed into the pinecone vector database
+        // await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
+        //   pineconeIndex,
+        //   namespace: createdFile.id,
+        // });
 
+        // Handle File saving in vector db using embeddings
+        await fetch(
+          `http://localhost:4000/save_file_in_vector_db?fileId=${createdFile.id}&fileUrl=https://utfs.io/f/${file.key}`,
+          {
+            method: "POST",
+          }
+        );
         // Update the file status to ready
 
         await db.file.update({

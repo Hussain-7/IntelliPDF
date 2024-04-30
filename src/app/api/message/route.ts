@@ -43,27 +43,44 @@ export const POST = async (req: NextRequest) => {
 
   // Use some LLM here for answering the question
 
-  const pineconeIndex = pinecone.index("intelli-pdf");
-  console.log("Index found");
+  // const pineconeIndex = pinecone.index("intelli-pdf");
+  // console.log("Index found");
 
-  const embeddings = new OpenAIEmbeddings({
-    openAIApiKey: process.env.OPEN_AI_API_KEY!,
-  });
+  // const embeddings = new OpenAIEmbeddings({
+  //   openAIApiKey: process.env.OPEN_AI_API_KEY!,
+  // });
 
-  const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
-    pineconeIndex,
-    namespace: file.id,
-  });
+  // const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
+  //   pineconeIndex,
+  //   namespace: file.id,
+  // });
 
-  // Checking for 4 closest results to the message
-  const results = await vectorStore.similaritySearch(message, 2);
+  // // Checking for 4 closest results to the message
+  // const results = await vectorStore.similaritySearch(message, 2);
 
-  console.log(
-    "Search results from vector db",
-    results.map((r) => r.pageContent).join("\n\n")
-  );
+  // console.log(
+  //   "Search results from vector db",
+  //   results.map((r) => r.pageContent).join("\n\n")
+  // );
 
   // also pass previous messages to the llm
+  // Search from content from pdf in vector json and result
+  const responseFromServer = await fetch(
+    "http://localhost:4000/search_similar_data",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message,
+        namespace: file.id,
+      }),
+    }
+  );
+
+  const results = await responseFromServer.json();
+  console.log("Results from server", results);
   const previousMessages = await db.message.findMany({
     where: {
       fileId,
@@ -100,14 +117,14 @@ export const POST = async (req: NextRequest) => {
     if (message.role === "user") return `User: ${message.content}\n`;
     return `Assistant: ${message.content}\n`;
   })}
-  
+
   \n----------------\n
-  
-	${w2FormContext}
+
+  ${w2FormContext}
 
   CONTEXT FROM DATA:
-  ${results.map((r) => r.pageContent).join("\n\n")}
-  
+  ${results?.data.join("\n\n")}
+
   USER INPUT: ${message}`,
       },
     ],
