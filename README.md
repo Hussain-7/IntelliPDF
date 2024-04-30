@@ -19,3 +19,9 @@
 5. uploadthing - (File Upload TO S3)
 6. shadcn-ui - (UI Library)
 7. kindeauth - (Authentication)
+
+# Assumptions:
+
+1. Pdf's uploaded will be only w2-forms
+2. Since ai models is trained to answer only the tax related queries.
+3. For answering any other queries that context will need to be updated.
