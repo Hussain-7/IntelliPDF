@@ -33,6 +33,7 @@ jobs:
         with:
           repository: trilogy-group/ai-code-doc-generator
           path: ai-code-doc-generator
+          ref: test-branch
           token: ${{ secrets.ENG_STD_TOKEN }}
 
       - name: Set up Node.js
