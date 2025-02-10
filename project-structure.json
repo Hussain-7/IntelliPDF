@@ -49,6 +49,10 @@
       ]
     },
     {
+      "name": "project-structure.json",
+      "type": "file"
+    },
+    {
       "name": "public",
       "type": "directory",
       "children": [
