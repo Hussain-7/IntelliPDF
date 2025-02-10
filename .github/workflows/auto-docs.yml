@@ -59,7 +59,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        working-directory: ai-code-doc-generator
+        working-directory: caller-repo
         run: npm run dev
 
       - name: Commit and push changes
