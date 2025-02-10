@@ -32,7 +32,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: trilogy-group/ai-code-doc-generator
-          ref: test-branch
           path: ai-code-doc-generator
           token: ${{ secrets.ENG_STD_TOKEN }}
 
@@ -49,8 +48,8 @@ jobs:
 
       - name: Generate documentation
         env:
-          REPO_PATH: $GITHUB_WORKSPACE/IntelliPDF
-          OUTPUT_PATH: $GITHUB_WORKSPACE/IntelliPDF/docs
+          REPO_PATH: ${{ github.workspace }}/IntelliPDF
+          OUTPUT_PATH: ${{ github.workspace }}/IntelliPDF/docs
           LANGCHAIN_ENDPOINT: ${{ secrets.LANGCHAIN_ENDPOINT }}
           LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
           LANGCHAIN_PROJECT: ${{ secrets.LANGCHAIN_PROJECT }}
