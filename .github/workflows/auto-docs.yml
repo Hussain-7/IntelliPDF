@@ -12,6 +12,7 @@ on:
     paths-ignore:
       - "docs/**"
       - "**/*.md"
+      - "**/*.json"
 
 concurrency:
   group: ${{ github.repository }}-${{ github.sha }}-${{ github.workflow }}
