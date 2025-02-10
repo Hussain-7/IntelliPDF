@@ -11,6 +11,7 @@ on:
       - main
     paths-ignore:
       - "docs/**"
+      - "**/*.md"
 
 concurrency:
   group: ${{ github.repository }}-${{ github.sha }}-${{ github.workflow }}
@@ -49,7 +50,7 @@ jobs:
       - name: Generate documentation
         env:
           REPO_PATH: ${{ github.workspace }}
-          OUTPUT_PATH: ${{ github.workspace }}/docs
+          OUTPUT_PATH: ${{ github.workspace }}
           LANGCHAIN_ENDPOINT: ${{ secrets.LANGCHAIN_ENDPOINT }}
           LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
           LANGCHAIN_PROJECT: ${{ secrets.LANGCHAIN_PROJECT }}
