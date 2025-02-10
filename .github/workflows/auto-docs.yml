@@ -52,7 +52,7 @@ jobs:
       - name: Generate documentation
         env:
           REPO_PATH: ${{ github.workspace }}/caller-repo
-          OUTPUT_PATH: ${{ github.workspace }}/caller-repo
+          OUTPUT_PATH: ${{ github.workspace }}/caller-repo/docs
           LANGCHAIN_ENDPOINT: ${{ secrets.LANGCHAIN_ENDPOINT }}
           LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
           LANGCHAIN_PROJECT: ${{ secrets.LANGCHAIN_PROJECT }}
