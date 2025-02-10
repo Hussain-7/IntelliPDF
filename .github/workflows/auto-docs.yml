@@ -63,7 +63,7 @@ jobs:
         run: npm run dev
 
       - name: Commit and push changes
-        working-directory: caller-repo/IntelliPDF
+        working-directory: caller-repo
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
