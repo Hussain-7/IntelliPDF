@@ -36,6 +36,7 @@ jobs:
         with:
           repository: trilogy-group/ai-code-doc-generator
           path: ai-code-doc-generator
+          ref: commit-changes-workflow-update
           token: ${{ secrets.ENG_STD_TOKEN }}
 
       - name: Set up Node.js
@@ -71,4 +72,4 @@ jobs:
           git add .
           git commit -m "Update auto-generated documentation" || echo "No changes to commit"
           git push || echo "No changes to push"
-          
+
