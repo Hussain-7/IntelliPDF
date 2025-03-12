@@ -15,7 +15,6 @@ ChatPDF is a full-stack application that allows users to upload PDF documents an
 - Document viewing with advanced PDF rendering capabilities
 - Real-time message processing with streaming responses
 - W2 tax form specialized analysis
-- Admin interface for system management
 
 ## 2. Architecture Overview
 ### Type of Application
@@ -90,7 +89,6 @@ Full-stack web application
 - Dashboard (List of uploaded documents)
 - Document View (PDF viewer with chat interface)
 - Auth Callback (Authentication handling)
-- Admin Page (Admin interface)
 
 ### Components
 - **Chat Components:**
