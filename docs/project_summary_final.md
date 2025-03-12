@@ -1,82 +1,21 @@
-The project summary for the Caller Repo project is comprehensive and covers the essential aspects needed to understand the project. Here's a detailed overview:
+The project documentation has been successfully updated based on the recent changes. Here are the key updates:
 
-# Project Documentation
+1. **New Feature Added**: An Admin Dashboard has been introduced for managing system statistics and settings. This feature is now documented under the "Key Features" and "Frontend Documentation" sections.
 
-## 1. Overview
-### Project Name
-Caller Repo
+2. **Documentation Structure**:
+   - The documentation includes sections on project overview, architecture, technology stack, API details, frontend and backend documentation, development guidelines, and onboarding instructions.
+   - The Admin Dashboard is highlighted as a new feature, providing system statistics and settings management for admin users.
 
-### Purpose
-The Caller Repo project is a full-stack application designed to facilitate communication and file management. It aims to solve the problem of efficient message handling and file uploads for users who need a streamlined interface for these tasks. The target users are individuals or organizations requiring a robust platform for managing communications and documents. The project provides functionalities such as user authentication, message exchange, file uploads, and a dashboard for managing these interactions.
+3. **Technology Stack**:
+   - The frontend uses React and Tailwind CSS.
+   - The backend is built with Node.js and utilizes tRPC for API handling.
+   - Prisma ORM is used for database management.
 
-### Key Features
-- User authentication and authorization
-- Message handling and exchange
-- File upload and management
-- Dashboard for user interaction and file management
-- Integration with external services for enhanced functionality
+4. **Development Guidelines**:
+   - Coding standards are maintained using ESLint and Prettier.
+   - CI/CD pipelines are managed with GitHub Actions.
 
-## 2. Architecture Overview
-### Type of Application
-Full-stack
+5. **Onboarding Instructions**:
+   - Steps for setting up the project, including cloning the repository, installing dependencies, configuring environment variables, and starting the application, are provided.
 
-## 3. Technology Stack
-### Frontend
-- **Framework/Library:** React
-- **CSS Frameworks:** Tailwind CSS
-
-### Backend
-- **Framework/Language:** Node.js
-- **Core Libraries:** tRPC for API handling
-
-### Database
-- **Type:** Relational
-- **Technology:** Prisma ORM
-
-### AI Usage
-- **Tools:** OpenAI for natural language processing
-
-## 4. API Documentation
-### Endpoint Details
-- **Auth API:** Handles user authentication routes
-- **Message API:** Manages message-related routes
-- **File Upload API:** Manages file upload routes
-
-## 5. Frontend Documentation
-### Views and Navigation
-- **Dashboard:** Central hub for user interactions
-- **Auth Callback:** Handles authentication redirects
-
-### Styling
-- Utilizes Tailwind CSS for styling and responsive design
-
-## 6. Backend Documentation
-### Core Logic
-- Handles business logic for user authentication, message processing, and file management
-
-### Services and Layers
-- Organized into controllers and services for modularity
-
-## 9. Development Guidelines
-### Coding Standards
-- ESLint for JavaScript code quality
-- Prettier for code formatting
-
-### CI/CD Pipelines
-- GitHub Actions for continuous integration and deployment
-
-## 10. Onboarding Checklist
-### Setup Instructions
-- Clone the repository
-- Install dependencies using Yarn
-- Configure environment variables using `.env.example`
-- Start the application with the provided scripts
-
-For more details, you can refer to the following files:
-- `README.md` for general project information and setup.
-- `package.json` for dependencies and scripts.
-- `.env.example` for environment variable configuration.
-- `schema.prisma` for database schema details.
-- `client.ts` in `src/app/_trpc` for API client setup.
-
-This summary provides a high-level understanding of the project and its components, making it suitable for developers and stakeholders to grasp the project's scope and functionality.
+For more detailed information, please refer to the updated documentation files such as README.md, package.json, and .env.example.

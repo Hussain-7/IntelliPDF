@@ -13,6 +13,7 @@ The Caller Repo project is a full-stack application designed to facilitate commu
 - File upload and management
 - Dashboard for user interaction and file management
 - Integration with external services for enhanced functionality
+- **New Feature:** Admin Dashboard for managing system statistics and settings
 
 ## 2. Architecture Overview
 ### Type of Application
@@ -44,6 +45,7 @@ Full-stack
 ### Views and Navigation
 - **Dashboard:** Central hub for user interactions
 - **Auth Callback:** Handles authentication redirects
+- **Admin Dashboard:** Provides system statistics and settings management for admin users
 
 ### Styling
 - Utilizes Tailwind CSS for styling and responsive design
