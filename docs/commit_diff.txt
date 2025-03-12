@@ -1,0 +1,19 @@
+commit cc580308a0276b9eb8c281e71ca74fb930ceb170
+Author: Hussain-7 <hussain2000.rizvi@gmail.com>
+Date:   Wed Mar 12 15:21:48 2025 +0500
+
+    model updated
+
+diff --git a/.github/workflows/auto-docs.yml b/.github/workflows/auto-docs.yml
+index e90529a..9bdf4a6 100644
+--- a/.github/workflows/auto-docs.yml
++++ b/.github/workflows/auto-docs.yml
+@@ -60,7 +60,7 @@ jobs:
+           LANGCHAIN_TRACING_V2: ${{ secrets.LANGCHAIN_TRACING_V2 }}
+           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+-          AI_MODEL: 'claude-3-7-sonnet-latest'
++          AI_MODEL: 'gpt-4o'
+         working-directory: ai-code-doc-generator
+         run: npm run dev
+ 

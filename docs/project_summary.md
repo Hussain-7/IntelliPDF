@@ -1,3 +1,4 @@
+```markdown
 # Project Documentation
 
 ## 1. Overview
@@ -53,7 +54,7 @@ Full-stack application
 
 ### AI Usage
 - **Purpose:** Document analysis, tax form processing, and question answering
-- **Tools:** OpenAI, Pinecone (vector database), Langchain
+- **Tools:** OpenAI (using model 'gpt-4o'), Pinecone (vector database), Langchain
 
 ### Cloud Services
 - **File Storage:** UploadThing
@@ -139,3 +140,4 @@ The application requires the following environment variables:
 - Build: Command defined in package.json
 - Start: Command defined in package.json
 - Database: Various database commands defined in package.json
+```
