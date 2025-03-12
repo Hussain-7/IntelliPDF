@@ -1,1 +1,0 @@
-No updates are needed for the project documentation, as there were no changes detected in the last commit.
